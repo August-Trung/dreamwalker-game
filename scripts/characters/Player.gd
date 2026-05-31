@@ -25,12 +25,15 @@ func _physics_process(delta):
 	var direction = Input.get_axis("ui_left", "ui_right")
 	if direction:
 		velocity.x = direction * SPEED
-		sprite.flip_h = direction < 0
+		# Ảnh gốc nhân vật đang quay mặt sang trái, nên:
+		# Đi sang phải (direction > 0) thì phải Flip (true) để quay sang phải
+		# Đi sang trái (direction < 0) thì KHÔNG Flip (false) để giữ nguyên mặt trái
+		sprite.flip_h = direction > 0
 		
-		# Procedural Walk Animation (Bobbing and rotation)
-		time_passed += delta * 15.0
-		sprite.position.y = -150.0 + sin(time_passed) * 15.0
-		sprite.rotation = sin(time_passed * 0.5) * 0.08
+		# Procedural Walk Animation (Nhún nhảy mạnh hơn vì không có chân)
+		time_passed += delta * 18.0
+		sprite.position.y = -150.0 + sin(time_passed) * 20.0
+		sprite.rotation = sin(time_passed * 0.5) * 0.15
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
