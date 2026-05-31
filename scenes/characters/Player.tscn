@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://player00001"]
+[gd_scene load_steps=8 format=3 uid="uid://player00001"]
 
 [ext_resource type="Script" path="res://scripts/characters/Player.gd" id="1_pl"]
 [ext_resource type="Texture2D" uid="uid://player_tex" path="res://assets/art/player.jpg" id="2_tex"]
@@ -10,6 +10,18 @@ shader_parameter/threshold = 0.9
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pl1"]
 size = Vector2(100, 300)
+
+[sub_resource type="Gradient" id="Gradient_light"]
+offsets = PackedFloat32Array(0, 0.7)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_light"]
+gradient = SubResource("Gradient_light")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+width = 800
+height = 800
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_pl")
@@ -25,5 +37,12 @@ position = Vector2(0, -150)
 shape = SubResource("RectangleShape2D_pl1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -250)
+zoom = Vector2(1.2, 1.2)
+position_smoothing_enabled = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -150)
-zoom = Vector2(1, 1)
+color = Color(0.8, 0.9, 1, 1)
+energy = 1.2
+texture = SubResource("GradientTexture2D_light")

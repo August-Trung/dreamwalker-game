@@ -1,37 +1,43 @@
-[gd_scene load_steps=7 format=3 uid="uid://0one100001"]
+[gd_scene load_steps=7 format=3 uid="uid://zone100001"]
 
 [ext_resource type="Script" path="res://scripts/levels/Zone1_Classroom.gd" id="1_lvl"]
 [ext_resource type="PackedScene" uid="uid://player00001" path="res://scenes/characters/Player.tscn" id="2_pl"]
 [ext_resource type="PackedScene" uid="uid://dreamui00001" path="res://scenes/ui/DreamwalkerUI.tscn" id="3_ui"]
-[ext_resource type="Texture2D" uid="uid://bc5sga7vjbhd3" path="res://assets/art/bg.jpg" id="4_bg"]
+[ext_resource type="Texture2D" uid="uid://bg_tex" path="res://assets/art/bg.jpg" id="4_bg"]
+[ext_resource type="Texture2D" uid="uid://player_tex" path="res://assets/art/player.jpg" id="5_ghost"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
-size = Vector2(4000, 100)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_trigger"]
-size = Vector2(200, 800)
+size = Vector2(10000, 100)
 
 [node name="Zone1_Classroom" type="Node2D"]
 script = ExtResource("1_lvl")
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.05, 0.05, 0.08, 1)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture = ExtResource("4_bg")
+centered = false
+scale = Vector2(1.875, 1.875)
 
 [node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2(0, 400)
+position = Vector2(0, 850)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("RectangleShape2D_floor")
 
-[node name="TriggerArea" type="Area2D" parent="."]
-position = Vector2(1000, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
-shape = SubResource("RectangleShape2D_trigger")
+[node name="Entity" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(2000, 700)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_ghost")
 
 [node name="Player" parent="." instance=ExtResource("2_pl")]
-position = Vector2(-600, 390)
+position = Vector2(200, 840)
 
 [node name="DreamwalkerUI" parent="." instance=ExtResource("3_ui")]
-
-[connection signal="body_entered" from="TriggerArea" to="." method="_on_trigger_area_body_entered"]

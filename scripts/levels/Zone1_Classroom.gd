@@ -1,18 +1,31 @@
 extends Node2D
 
-func _ready():
-	# Cảnh báo đầu tiên
-	await get_tree().create_timer(1.0).timeout
-	SystemManager.show_message("[Dream Link Established. Sync: 3%]")
-	
-	# Sự kiện "Nguồn thứ ba" tiếp cận
-	await get_tree().create_timer(4.0).timeout
-	SystemManager.show_message("[Có người đang đến gần...]")
-	
-	# Bắt đầu kích hoạt lắng nghe Microphone đời thực
-	await get_tree().create_timer(3.0).timeout
-	SystemManager.start_listening_mic()
+var has_triggered_ghost = false
+@onready var player = $Player
+@onready var entity_sprite = $Entity
 
-func _on_trigger_area_body_entered(body):
-	if body.name == "Player":
-		SystemManager.increase_corruption(10, "Định danh không đầy đủ.")
+func _ready():
+	entity_sprite.visible = false
+
+func _process(delta):
+	# Walk to x=1500 to trigger the ghost
+	if not has_triggered_ghost and player.position.x > 1500:
+		has_triggered_ghost = true
+		spawn_ghost()
+
+func spawn_ghost():
+	# Place entity ahead of player
+	entity_sprite.position.x = player.position.x + 1200
+	entity_sprite.visible = true
+	
+	# Flicker entity to make it creepy
+	var tween = create_tween()
+	tween.tween_property(entity_sprite, "modulate:a", 0.5, 0.1)
+	tween.tween_property(entity_sprite, "modulate:a", 0.1, 0.1)
+	tween.tween_property(entity_sprite, "modulate:a", 0.8, 0.1)
+	
+	# Trigger system voice and warning!
+	SystemManager.trigger_system_warning("PHÁT HIỆN DỊ THƯỜNG. GIAO THỨC IM LẶNG: NÍN THỞ NGAY LẬP TỨC!", true)
+	
+	# Disappear after 1 second
+	get_tree().create_timer(1.0).timeout.connect(func(): entity_sprite.visible = false)
