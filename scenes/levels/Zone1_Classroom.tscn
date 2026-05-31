@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://0one100001"]
+
+[ext_resource type="Script" path="res://scripts/levels/Zone1_Classroom.gd" id="1_lvl"]
+[ext_resource type="PackedScene" uid="uid://player00001" path="res://scenes/characters/Player.tscn" id="2_pl"]
+[ext_resource type="PackedScene" uid="uid://dreamui00001" path="res://scenes/ui/DreamwalkerUI.tscn" id="3_ui"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(2000, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trigger"]
+size = Vector2(100, 200)
+
+[node name="Zone1_Classroom" type="Node2D"]
+script = ExtResource("1_lvl")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(0, 100)
+
+[node name="ColorRect" type="ColorRect" parent="Floor"]
+offset_left = -1000.0
+offset_top = -20.0
+offset_right = 1000.0
+offset_bottom = 20.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="TriggerArea" type="Area2D" parent="."]
+position = Vector2(300, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
+shape = SubResource("RectangleShape2D_trigger")
+
+[node name="Player" parent="." instance=ExtResource("2_pl")]
+position = Vector2(-200, 80)
+
+[node name="DreamwalkerUI" parent="." instance=ExtResource("3_ui")]
+
+[connection signal="body_entered" from="TriggerArea" to="." method="_on_trigger_area_body_entered"]

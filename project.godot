@@ -16,12 +16,19 @@ run/main_scene="res://scenes/levels/Zone1_Classroom.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+driver/enable_input=true
+
+[autoload]
+
+SystemManager="*res://scripts/core/SystemManager.gd"
+
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep"
 
 [rendering]
 
