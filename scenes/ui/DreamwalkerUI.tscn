@@ -1,9 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://dreamui00001"]
+[gd_scene load_steps=4 format=3 uid="uid://dreamui00001"]
 
 [ext_resource type="Script" path="res://scripts/ui/DreamwalkerUI.gd" id="1_ui"]
+[ext_resource type="Texture2D" uid="uid://glitch_tex" path="res://assets/art/ui_glitch.png" id="2_glitch"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_glitch"]
+blend_mode = 1
 
 [node name="DreamwalkerUI" type="CanvasLayer"]
 script = ExtResource("1_ui")
+
+[node name="GlitchOverlay" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.05)
+material = SubResource("CanvasItemMaterial_glitch")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_glitch")
+expand_mode = 1
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -20,14 +35,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -300.0
+offset_left = -600.0
 offset_top = -100.0
-offset_right = 300.0
+offset_right = 600.0
 offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/normal_font_size = 32
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 42
 bbcode_enabled = true
-text = "[System Warning]"
+text = "[center][System Warning][/center]"
 fit_content = true
