@@ -1,0 +1,17 @@
+# Godot 4+ specific ignores
+.godot/
+*.translation
+
+# Imported translations (if not using built-in localization)
+*.csv.import
+
+# Exported games
+export_presets.cfg
+*.apk
+*.aab
+*.keystore
+*.exe
+*.pck
+
+# Mac specific
+.DS_Store
