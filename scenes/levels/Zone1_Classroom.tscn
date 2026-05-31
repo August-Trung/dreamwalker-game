@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://zone100001"]
+[gd_scene load_steps=7 format=3 uid="uid://0one100001"]
 
 [ext_resource type="Script" path="res://scripts/levels/Zone1_Classroom.gd" id="1_lvl"]
 [ext_resource type="PackedScene" uid="uid://player00001" path="res://scenes/characters/Player.tscn" id="2_pl"]
 [ext_resource type="PackedScene" uid="uid://dreamui00001" path="res://scenes/ui/DreamwalkerUI.tscn" id="3_ui"]
-[ext_resource type="Texture2D" uid="uid://bg_tex" path="res://assets/art/bg.png" id="4_bg"]
+[ext_resource type="Texture2D" uid="uid://bc5sga7vjbhd3" path="res://assets/art/bg.jpg" id="4_bg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
 size = Vector2(4000, 100)

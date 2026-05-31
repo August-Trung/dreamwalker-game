@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dreamui00001"]
 
 [ext_resource type="Script" path="res://scripts/ui/DreamwalkerUI.gd" id="1_ui"]
-[ext_resource type="Texture2D" uid="uid://glitch_tex" path="res://assets/art/ui_glitch.png" id="2_glitch"]
+[ext_resource type="Texture2D" uid="uid://glitch_tex" path="res://assets/art/ui_glitch.jpg" id="2_glitch"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_glitch"]
 blend_mode = 1
